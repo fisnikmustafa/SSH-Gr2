@@ -1,0 +1,10 @@
+.label{
+    -fx-font-weight: bold;
+    -fx-font-family: "monospace";
+}
+
+.btn-one{
+    -fx-background-color: "808080";
+    -fx-text-fill: black;
+    -fx-font-family: "fantasy";
+}

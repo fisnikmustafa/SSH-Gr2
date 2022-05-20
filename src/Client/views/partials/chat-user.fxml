@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="221.0" spacing="15.0" styleClass="selected" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controllers.partials.ChatUserController">
+   <children>
+      <Circle fx:id="pictureCircle" fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #e0e0e0 transparent #e0e0e0 transparent;">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <children>
+            <Label text="John Doe" />
+         </children>
+      </HBox>
+      <ImageView fx:id="statusIcon" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/icons8-green-circle-48.png" />
+         </image>
+      </ImageView>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+   </padding>
+</HBox>
