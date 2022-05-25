@@ -15,7 +15,7 @@
             <Insets />
          </HBox.margin>
          <children>
-            <Label text="John Doe" />
+            <Label fx:id="nameLabel" text="John Doe" />
          </children>
       </HBox>
       <ImageView fx:id="statusIcon" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">

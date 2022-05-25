@@ -20,7 +20,7 @@
                <image>
                   <Image url="@../images/fiek.jpeg" />
                </image>
-               
+
             </ImageView>
          </children>
       </Pane>
@@ -36,7 +36,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="57.0" layoutY="215.0" prefHeight="25.0" prefWidth="245.0" promptText="Email" stylesheets="@../styles/style.css" />
+            <TextField fx:id="emailField" layoutX="57.0" layoutY="215.0" prefHeight="25.0" prefWidth="245.0" promptText="Email" stylesheets="@../styles/style.css" />
             <Button fx:id="btnLogin" layoutX="66.0" layoutY="331.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="38.0" prefWidth="227.0" stylesheets="@../styles/style.css" text="Login" textFill="WHITE">
                <styleClass>
                   <String fx:value="update-button" />
@@ -46,13 +46,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <PasswordField layoutX="57.0" layoutY="264.0" prefHeight="25.0" prefWidth="245.0" promptText="Password" stylesheets="@../styles/style.css" />
+            <PasswordField fx:id="passwordField" layoutX="57.0" layoutY="264.0" prefHeight="25.0" prefWidth="245.0" promptText="Password" stylesheets="@../styles/style.css" />
             <Label layoutX="157.0" layoutY="435.0" opacity="0.56" text="FIEK, 2022" textFill="#b1b1b1">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <font>
                   <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="loginMessage" alignment="CENTER" layoutX="71.0" layoutY="390.0" prefHeight="4.0" prefWidth="217.0" textFill="#ff8900">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
          </children>
