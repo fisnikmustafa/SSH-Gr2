@@ -1,4 +1,4 @@
-package Client;
+package Client.models;
 
 import java.util.Map;
 

@@ -1,10 +1,10 @@
 package Client.controllers;
 
-import Client.Grade;
-import Client.Student;
+import Client.models.Grade;
+import Client.models.Student;
 import Client.utils.SessionManager;
-import Client.components.ChatUserComponent;
 import Client.utils.Request;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,9 +29,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class StudentController implements Initializable {
 
+    public static ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
     private Request request = new Request();
 
     @FXML
@@ -42,6 +45,9 @@ public class StudentController implements Initializable {
 
     @FXML
     private VBox chatVbox;
+
+    @FXML
+    private ScrollPane activeUsersScrollPane;
 
     @FXML
     private Button btnProfile;
@@ -117,6 +123,13 @@ public class StudentController implements Initializable {
         renderStudent(SessionManager.student);
         renderGrades(SessionManager.student);
         loadChat();
+
+        exec.scheduleAtFixedRate(new Runnable() {
+            public void run() {
+                loadChat();
+            }
+        }, 0, 30, TimeUnit.SECONDS);
+
     }
 
     @FXML
@@ -149,6 +162,8 @@ public class StudentController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
+            StudentController.exec.shutdown();
+
             Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
             Parent parent = FXMLLoader.load(getClass().getResource("../views/login.fxml"));
             Scene scene = new Scene(parent);
@@ -202,23 +217,24 @@ public class StudentController implements Initializable {
     }
 
     private void loadChat(){
-        Student[] activeStudents = new Student[0];
-        try {
-            activeStudents = request.getActiveStudents();
+        Runnable task = () -> {
+            Platform.runLater(() -> {
+                try{
+                    System.out.println("Reloading chat...");
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("../views/usersbox.fxml"));
+                    VBox chatBox = loader.load();
+                    activeUsersScrollPane.setContent(chatBox);
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                    activeUsersScrollPane.setContent(null);
+                }
 
-            for (Student s : activeStudents){
-                ChatUserComponent chatUser = new ChatUserComponent();
-                chatUser.picturePath = s.getPicture_path();
-                chatUser.studentName = s.getFirst_name() + " " + s.getLast_name();
-
-                Node node = chatUser.getContent();
-
-                chatVbox.getChildren().add(node);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            });
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     private void renderStudent(Student s){

@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import Client.Student;
+import Client.models.Student;
 import Client.config.IPconfig;
 import com.google.gson.Gson;
 

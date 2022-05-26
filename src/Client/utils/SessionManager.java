@@ -1,6 +1,6 @@
 package Client.utils;
 
-import Client.Student;
+import Client.models.Student;
 
 public class SessionManager {
     public static Student student = null;

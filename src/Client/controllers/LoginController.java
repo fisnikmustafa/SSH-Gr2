@@ -80,6 +80,7 @@ public class LoginController implements Initializable {
                 primaryStage.setOnCloseRequest(e -> {
                     try {
                         request.changeStatus(SessionManager.student.getEmail(), 0);
+                        StudentController.exec.shutdown();
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

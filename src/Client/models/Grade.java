@@ -1,4 +1,4 @@
-package Client;
+package Client.models;
 
 public class Grade {
     private String className;
