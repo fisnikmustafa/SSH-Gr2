@@ -1,5 +1,6 @@
 package Client.components;
 
+import Client.controllers.StudentController;
 import Client.controllers.partials.ChatUserController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,8 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class ChatUserComponent {
+
+    public StudentController studentController;
     public String picturePath;
     public String studentName;
+    public int studentId;
 
     public ChatUserComponent() {
     }
@@ -24,7 +28,7 @@ public class ChatUserComponent {
         Node node = loader.load();
 
         ChatUserController controller = loader.<ChatUserController>getController();
-        controller.initData(picturePath, studentName);
+        controller.initData(picturePath, studentName, studentController);
 
         return node;
     }

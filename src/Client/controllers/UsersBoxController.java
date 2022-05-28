@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 public class UsersBoxController implements Initializable {
 
     private Request request = new Request();
+    public static StudentController parentController;
 
     @FXML
     private VBox chatVbox;
@@ -33,6 +34,7 @@ public class UsersBoxController implements Initializable {
                 ChatUserComponent chatUser = new ChatUserComponent();
                 chatUser.picturePath = s.getPicture_path();
                 chatUser.studentName = s.getFirst_name() + " " + s.getLast_name();
+                chatUser.studentController = this.parentController;
 
                 Node node = chatUser.getContent();
 

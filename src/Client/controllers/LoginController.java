@@ -2,6 +2,7 @@ package Client.controllers;
 
 import Client.utils.Request;
 import Client.utils.SessionManager;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -80,7 +81,11 @@ public class LoginController implements Initializable {
                 primaryStage.setOnCloseRequest(e -> {
                     try {
                         request.changeStatus(SessionManager.student.getEmail(), 0);
+                        SessionManager.student = null;
                         StudentController.exec.shutdown();
+                        StudentController.endConnection();
+                        Platform.exit();
+
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

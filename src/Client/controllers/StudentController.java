@@ -5,12 +5,16 @@ import Client.models.Student;
 import Client.utils.SessionManager;
 import Client.utils.Request;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,12 +22,18 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
+import java.io.*;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
@@ -55,7 +65,22 @@ public class StudentController implements Initializable {
     private VBox chatVbox;
 
     @FXML
+    private VBox messagesVbox;
+
+    @FXML
     private ScrollPane activeUsersScrollPane;
+
+    @FXML
+    private ScrollPane messageScrollPane;
+
+    @FXML
+    private Button btnSendMessage;
+
+    @FXML
+    private Button btnAudioCall;
+
+    @FXML
+    private Button btnVideoCall;
 
     @FXML
     private Button btnProfile;
@@ -103,6 +128,9 @@ public class StudentController implements Initializable {
     private TextField phoneField;
 
     @FXML
+    private TextField chatMessageField;
+
+    @FXML
     private TableView<Grade> gradesTableView;
 
     @FXML
@@ -113,6 +141,9 @@ public class StudentController implements Initializable {
 
     @FXML
     private Label gpaLabel;
+
+    @FXML
+    private Label chatNameLabel;
 
     //TO DO:
     @FXML
@@ -146,15 +177,26 @@ public class StudentController implements Initializable {
         loadProfilePicture(SessionManager.student.getPicture_path());
         renderStudent(SessionManager.student);
         renderGrades(SessionManager.student);
+
+        UsersBoxController.parentController = this;
+
         loadChat();
 
+
+        messagesVbox.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                messageScrollPane.setVvalue((Double) newValue);
+            }
+        });
+
+
+        //load active users
         exec.scheduleAtFixedRate(new Runnable() {
             public void run() {
                 loadChat();
             }
         }, 0, 30, TimeUnit.SECONDS);
-        
-        
 
     }
 
@@ -180,10 +222,30 @@ public class StudentController implements Initializable {
         
         if (actionEvent.getSource() == btnSendMessage){
             System.out.println("Btn send clicked!");
-            //String sendTo = SessionManager.selectedChatUserName;
+            String sendTo = SessionManager.selectedChatUserName;
             if(!chatMessageField.getText().isEmpty()) {
                 String message = chatMessageField.getText();
                 sendMessage(sendTo, message);
+
+                HBox hBox = new HBox();
+                hBox.setAlignment(Pos.CENTER_RIGHT);
+                hBox.setPadding(new Insets(5,5,5,10));
+
+                Text text = new Text(message);
+                text.setStyle("-fx-font-size: 20px;");
+
+                TextFlow textFlow = new TextFlow(text);
+                textFlow.setStyle("-fx-color: rgb(239,242,255); " +
+                        "-fx-background-color: rgb(15,125,242);" +
+                        " -fx-background-radius: 20px;");
+                textFlow.setPadding(new Insets(5,10,5,10));
+                text.setFill(Color.color(0.934,0.945, 0.996));
+
+                hBox.getChildren().add(textFlow);
+                messagesVbox.getChildren().add(hBox);
+
+                chatMessageField.clear();
+                chatMessageField.requestFocus();
             }
         }
 
@@ -199,12 +261,12 @@ public class StudentController implements Initializable {
         if(result.get() == ButtonType.OK){
             StudentController.exec.shutdown();
 
-            Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-            Parent parent = FXMLLoader.load(getClass().getResource("../views/login.fxml"));
-            Scene scene = new Scene(parent);
-            primaryStage.setScene(scene);
+            endConnection();
+            //r.interrupt();
             request.changeStatus(emailField.getText(), 0);
             SessionManager.student = null;
+
+            Platform.exit();
         } else return;
     }
 
@@ -296,8 +358,30 @@ public class StudentController implements Initializable {
     }
     
     //CHAT:
-    //read messages:
 
+    public static void endConnection(){
+        try{
+            outStream.writeUTF("exit");
+            //r.interrupt();
+        } catch (IOException e1){
+            e1.printStackTrace();
+        }
+    }
+
+    public void openChat(){
+        if(!paneChat.isVisible()){
+            paneProfile.setVisible(false);
+            paneGrades.setVisible(false);
+            paneChat.setVisible(true);
+            paneChat.toFront();
+
+        }
+
+        messagesVbox.getChildren().clear();
+        chatNameLabel.setText(SessionManager.selectedChatUserName);
+    }
+
+    //read messages:
     public void read(){
         Runnable task = () -> {
             while (true) {
@@ -327,5 +411,29 @@ public class StudentController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void loadReceivedMessage(String message){
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        hBox.setPadding(new Insets(5,5,5,10));
+
+        Text text = new Text(message);
+        text.setStyle("-fx-font-size: 20px;");
+
+        TextFlow textFlow = new TextFlow(text);
+        textFlow.setStyle("-fx-background-color: rgb(233,233,235);" +
+                " -fx-background-radius: 20px;");
+        textFlow.setPadding(new Insets(5,10,5,10));
+
+
+        hBox.getChildren().add(textFlow);
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                messagesVbox.getChildren().add(hBox);
+            }
+        });
     }
 }
