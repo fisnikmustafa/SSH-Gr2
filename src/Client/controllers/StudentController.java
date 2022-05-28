@@ -33,6 +33,14 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class StudentController implements Initializable {
+    
+    private Socket socket;
+    private BufferedReader bufferedReader;
+    private BufferedWriter bufferedWriter;
+    private String name;
+
+    DataInputStream inputStream;
+    static DataOutputStream outStream;
 
     public static ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
     private Request request = new Request();
@@ -115,6 +123,22 @@ public class StudentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        
+        try{
+            Student s = SessionManager.student;
+            this.socket = new Socket("localhost", 8818);
+            this.name = s.getFirst_name() + " " + s.getLast_name();
+
+            inputStream = new DataInputStream(socket.getInputStream()); // create input and output stream
+            outStream = new DataOutputStream(socket.getOutputStream());
+            outStream.writeUTF(name); // send user name to the output stream
+
+            read();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        
+        
         this.gradeColumn.setCellValueFactory(new PropertyValueFactory<>("grade"));
         this.classColumn.setCellValueFactory(new PropertyValueFactory<>("className"));
 
@@ -129,6 +153,8 @@ public class StudentController implements Initializable {
                 loadChat();
             }
         }, 0, 30, TimeUnit.SECONDS);
+        
+        
 
     }
 
@@ -149,6 +175,15 @@ public class StudentController implements Initializable {
                 paneChat.setVisible(false);
                 paneGrades.setVisible(true);
                 paneGrades.toFront();
+            }
+        }
+        
+        if (actionEvent.getSource() == btnSendMessage){
+            System.out.println("Btn send clicked!");
+            //String sendTo = SessionManager.selectedChatUserName;
+            if(!chatMessageField.getText().isEmpty()) {
+                String message = chatMessageField.getText();
+                sendMessage(sendTo, message);
             }
         }
 
@@ -258,5 +293,39 @@ public class StudentController implements Initializable {
 
         ObservableList<Grade> gradeItems = FXCollections.observableArrayList(gradeList);
         gradesTableView.setItems(gradeItems);
+    }
+    
+    //CHAT:
+    //read messages:
+
+    public void read(){
+        Runnable task = () -> {
+            while (true) {
+                try {
+                    String m = inputStream.readUTF();  // read message from server
+                    System.out.println("inside read thread : " + m); // print message for testing purpose
+                    loadReceivedMessage(m);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+
+    public void sendMessage(String name, String message) {
+        if (socket.isConnected()) {
+            String messageToSend = "filename" + ":" + name + ":" + message;
+            try {
+                outStream.writeUTF(messageToSend);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }
