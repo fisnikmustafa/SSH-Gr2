@@ -117,7 +117,7 @@
         </VBox>
         <StackPane layoutX="226.0" layoutY="-2.0" prefHeight="774.0" prefWidth="804.0">
             <children>
-                <Pane fx:id="paneProfile" prefHeight="590.0" prefWidth="642.0" visible="false">
+                <Pane fx:id="paneProfile" prefHeight="590.0" prefWidth="642.0">
                     <children>
                         <Label layoutX="18.0" layoutY="14.0" text="Profili">
                             <font>
@@ -356,7 +356,7 @@
                         </Label>
                     </children>
                 </Pane>
-                <Pane fx:id="paneChat" prefHeight="590.0" prefWidth="794.0">
+                <Pane fx:id="paneChat" prefHeight="590.0" prefWidth="794.0" visible="false">
                     <children>
                         <Label layoutX="18.0" layoutY="14.0" text="Biseda">
                             <font>
@@ -374,7 +374,7 @@
                                         </Label>
                                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" translateX="270.0">
                                             <children>
-                                                <Button fx:id="btnAudioCall" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 20px;" styleClass="menu-buttons" stylesheets="@../styles/style.css">
+                                                <Button fx:id="btnAudioCall" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#handleClicks" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 20px;" styleClass="menu-buttons" stylesheets="@../styles/style.css">
                                                     <graphic>
                                                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>

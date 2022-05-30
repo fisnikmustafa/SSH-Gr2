@@ -36,13 +36,13 @@ public class AudioPeer {
         receiveAudioThread.start();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String address = "172.16.0.71";
         int sendport = 9786;
         int acceptport=9787;
 
         new AudioPeer(address, sendport, acceptport);
-    }
+    }*/
 
     private AudioFormat getAudioFormat() {
         float sampleRate = 16000F;

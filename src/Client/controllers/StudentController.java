@@ -162,7 +162,7 @@ public class StudentController implements Initializable {
         
         try{
             Student s = SessionManager.student;
-            this.socket = new Socket("localhost", 8818);
+            this.socket = new Socket("192.168.177.211", 8818);
             this.name = s.getFirst_name() + " " + s.getLast_name();
 
             inputStream = new DataInputStream(socket.getInputStream()); // create input and output stream
