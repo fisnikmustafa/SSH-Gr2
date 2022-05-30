@@ -1,5 +1,6 @@
 package Client.controllers;
 
+import ChatServer.AudioPeer;
 import Client.models.Grade;
 import Client.models.Student;
 import Client.utils.SessionManager;
@@ -43,6 +44,10 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class StudentController implements Initializable {
+
+    String myAddress = "192.168.177.211";
+    int acceptPort = 9786;
+    int sendPort = 9787;
     
     private Socket socket;
     private BufferedReader bufferedReader;
@@ -249,6 +254,12 @@ public class StudentController implements Initializable {
             }
         }
 
+        if(actionEvent.getSource() == btnAudioCall){
+            String sendTo = SessionManager.selectedChatUserName;
+            String message = "[{MY_PORTS}]=" + acceptPort + "," + sendPort + ";[{MY_ADDRESS}]=" + myAddress;
+            System.out.println(message);
+            sendMessage(sendTo, message);
+        }
 
     }
 
@@ -388,7 +399,50 @@ public class StudentController implements Initializable {
                 try {
                     String m = inputStream.readUTF();  // read message from server
                     System.out.println("inside read thread : " + m); // print message for testing purpose
-                    loadReceivedMessage(m);
+
+                    if(m.startsWith("[{MY_PORTS}]=")){
+                        //formati i mesazhit: [{MY_PORTS}]=9787,9788;[{MY_ADDRESS}]=192.168.0.9
+
+                        String[] msgList = m.split(";");
+
+                        //msgList[0] = [{MY_PORTS}]=9787,9788
+                        //msgList[1] = {MY_ADDRESS}]=192.168.0.9
+
+                        String[] portsMessage = msgList[0].split("=");
+                        String[] ports = portsMessage[1].split(",");
+
+                        //acceptPorti i thirresit, behet sendPort i marresit dhe anasjelltas
+                        sendPort = Integer.parseInt(ports[0]);
+                        acceptPort = Integer.parseInt(ports[1]);
+
+
+
+                        String[] ipMessage = msgList[1].split("=");
+                        String callerAdress = ipMessage[1];
+
+                        //dergoja IP adresen, thirresit
+                        String sendTo = SessionManager.selectedChatUserName;
+                        String message = "[{MY_ADDRESS}]=" + myAddress;
+                        System.out.println(message);
+                        sendMessage(sendTo, message);
+
+                        System.out.print("Incoming call from " + callerAdress + " ...");
+                        System.out.println("Adresa e userit2: " + myAddress);
+                        System.out.println("Accept port i user2: " + acceptPort + " , send port i user2: " + sendPort);
+
+                        AudioPeer p2 = new AudioPeer(callerAdress, sendPort, acceptPort);
+
+                    } else if (m.startsWith("[{MY_ADDRESS}]=")) {
+                        String[] msgList = m.split("=");
+                        String callReceiverAddress = msgList[1];
+
+                        System.out.println("Call accepted from: " + callReceiverAddress);
+                        System.out.println("Accept port i user1: " + acceptPort + " , send port i user1: " + sendPort);
+
+                        AudioPeer p1 = new AudioPeer(callReceiverAddress, sendPort, acceptPort);
+                    } else {
+                        loadReceivedMessage(m);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     break;
