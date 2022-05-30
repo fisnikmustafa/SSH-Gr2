@@ -16,6 +16,9 @@ public class AudioPeer {
     private final byte audioBuffer[] = new byte[10000];
     private TargetDataLine targetDataLine;
 
+    private SendAudio sendAudioThread;
+    private ReceiveAudio receiveAudioThread;
+
     AudioInputStream audioInputStream;
     SourceDataLine sourceDataLine;
 
@@ -25,8 +28,12 @@ public class AudioPeer {
         this.acceptPort = acceptPort;
 
         setupAudio();
-        new SendAudio(this.sendPort, this.address).start();
-        new ReceiveAudio(this.acceptPort, this.address).start();
+
+        sendAudioThread = new SendAudio(this.sendPort, this.address);
+        receiveAudioThread = new ReceiveAudio(this.acceptPort, this.address);
+
+        sendAudioThread.start();
+        receiveAudioThread.start();
     }
 
     public static void main(String[] args) {
@@ -160,6 +167,10 @@ public class AudioPeer {
             }
         }
 
+    }
 
+    public void killThreads(){
+        sendAudioThread.interrupt();;
+        receiveAudioThread.interrupt();
     }
 }

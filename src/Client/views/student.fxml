@@ -24,7 +24,7 @@
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="225.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-            <Circle fx:id="profilePicture" fill="DODGERBLUE" radius="62.0" stroke="BLACK" strokeType="INSIDE" />
+                <Circle fx:id="profilePicture" fill="DODGERBLUE" radius="62.0" stroke="BLACK" strokeType="INSIDE" />
                 <Button fx:id="btnProfile" contentDisplay="TOP" graphicTextGap="5.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="26.0" prefWidth="228.0" stylesheets="@../styles/style.css" text="Profili">
                     <graphic>
                         <ImageView fitHeight="70.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
@@ -63,34 +63,34 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-            <VBox prefHeight="438.0" prefWidth="226.0" style="-fx-border-color: #e0e0e0 transparent #e0e0e0 transparent;">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-               <children>
-                  <Button fx:id="btnChat" contentDisplay="TOP" graphicTextGap="5.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="26.0" prefWidth="228.0" style="-fx-cursor: default;" styleClass="menu-buttons" stylesheets="@../styles/style.css" text="Biseda">
-                     <graphic>
-                        <ImageView fitHeight="70.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/icons8-chat-48.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </Button>
-                  <VBox prefHeight="400.0" prefWidth="224.0">
-                     <children>
-                        <ScrollPane fx:id="activeUsersScrollPane" prefHeight="379.0" prefWidth="224.0">
-                           <content>
-                              <VBox disable="true" maxWidth="221.0" prefHeight="363.0" prefWidth="222.0" visible="false" />
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
+                <VBox prefHeight="438.0" prefWidth="226.0" style="-fx-border-color: #e0e0e0 transparent #e0e0e0 transparent;">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                    <children>
+                        <Button fx:id="btnChat" contentDisplay="TOP" graphicTextGap="5.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="26.0" prefWidth="228.0" style="-fx-cursor: default;" styleClass="menu-buttons" stylesheets="@../styles/style.css" text="Biseda">
+                            <graphic>
+                                <ImageView fitHeight="70.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8-chat-48.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT" />
+                            </cursor>
+                        </Button>
+                        <VBox prefHeight="400.0" prefWidth="224.0">
+                            <children>
+                                <ScrollPane fx:id="activeUsersScrollPane" prefHeight="379.0" prefWidth="224.0">
+                                    <content>
+                                        <VBox disable="true" maxWidth="221.0" prefHeight="363.0" prefWidth="222.0" visible="false" />
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
                 <Button fx:id="btnExit" contentDisplay="TOP" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="26.0" prefWidth="226.0" stylesheets="@../styles/style.css" text="Dil">
                     <graphic>
                         <ImageView fitHeight="70.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
@@ -111,9 +111,9 @@
                     </cursor>
                 </Button>
             </children>
-         <padding>
-            <Insets top="20.0" />
-         </padding>
+            <padding>
+                <Insets top="20.0" />
+            </padding>
         </VBox>
         <StackPane layoutX="226.0" layoutY="-2.0" prefHeight="774.0" prefWidth="804.0">
             <children>
@@ -175,94 +175,94 @@
                                         </ImageView>
                                     </children>
                                 </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="575.0">
-                           <children>
-                              <Label minWidth="200.0" text="Emri i prindit">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="parentNameField" editable="false" prefHeight="26.0" prefWidth="294.0" styleClass="text-input" stylesheets="@../styles/style.css">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </TextField>
-                              <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                                 <image>
-                                    <Image url="@../images/padlock.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="575.0">
-                           <children>
-                              <Label minWidth="200.0" text="Mbiemri">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="lastNameField" editable="false" prefHeight="26.0" prefWidth="294.0" styleClass="text-input" stylesheets="@../styles/style.css">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </TextField>
-                              <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                                 <image>
-                                    <Image url="@../images/padlock.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="575.0">
-                           <children>
-                              <Label minWidth="200.0" text="Gjinia">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="genderField" editable="false" prefHeight="26.0" prefWidth="294.0" styleClass="text-input" stylesheets="@../styles/style.css">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </TextField>
-                              <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                                 <image>
-                                    <Image url="@../images/padlock.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="575.0">
-                           <children>
-                              <Label minWidth="200.0" text="Shkolla">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="schoolNameField" editable="false" prefHeight="26.0" prefWidth="294.0" styleClass="text-input" stylesheets="@../styles/style.css">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </TextField>
-                              <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                                 <image>
-                                    <Image url="@../images/padlock.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="575.0">
+                                    <children>
+                                        <Label minWidth="200.0" text="Emri i prindit">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="parentNameField" editable="false" prefHeight="26.0" prefWidth="294.0" styleClass="text-input" stylesheets="@../styles/style.css">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </TextField>
+                                        <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                            <HBox.margin>
+                                                <Insets left="15.0" />
+                                            </HBox.margin>
+                                            <image>
+                                                <Image url="@../images/padlock.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="575.0">
+                                    <children>
+                                        <Label minWidth="200.0" text="Mbiemri">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="lastNameField" editable="false" prefHeight="26.0" prefWidth="294.0" styleClass="text-input" stylesheets="@../styles/style.css">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </TextField>
+                                        <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                            <HBox.margin>
+                                                <Insets left="15.0" />
+                                            </HBox.margin>
+                                            <image>
+                                                <Image url="@../images/padlock.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="575.0">
+                                    <children>
+                                        <Label minWidth="200.0" text="Gjinia">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="genderField" editable="false" prefHeight="26.0" prefWidth="294.0" styleClass="text-input" stylesheets="@../styles/style.css">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </TextField>
+                                        <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                            <HBox.margin>
+                                                <Insets left="15.0" />
+                                            </HBox.margin>
+                                            <image>
+                                                <Image url="@../images/padlock.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="575.0">
+                                    <children>
+                                        <Label minWidth="200.0" text="Shkolla">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="schoolNameField" editable="false" prefHeight="26.0" prefWidth="294.0" styleClass="text-input" stylesheets="@../styles/style.css">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </TextField>
+                                        <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                            <HBox.margin>
+                                                <Insets left="15.0" />
+                                            </HBox.margin>
+                                            <image>
+                                                <Image url="@../images/padlock.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
                             </children>
                         </VBox>
                         <VBox layoutX="140.0" layoutY="435.0" prefHeight="144.0" prefWidth="575.0" spacing="5.0">
@@ -329,7 +329,7 @@
                 <Pane prefHeight="590.0" prefWidth="642.0" visible="false" />
                 <Pane fx:id="paneGrades" prefHeight="590.0" prefWidth="642.0" visible="false">
                     <children>
-                  <PieChart fx:id="pieChart" layoutX="245.0" layoutY="469.0" prefHeight="279.0" prefWidth="315.0" />
+                        <PieChart fx:id="pieChart" layoutX="245.0" layoutY="469.0" prefHeight="279.0" prefWidth="315.0" />
                         <Label layoutX="18.0" layoutY="14.0" text="Notat">
                             <font>
                                 <Font size="24.0" />
@@ -344,99 +344,99 @@
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
-                  <Label layoutX="583.0" layoutY="728.0" text="Nota mesatare: ">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="gpaLabel" layoutX="681.0" layoutY="728.0" text="0.00">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
+                        <Label layoutX="583.0" layoutY="728.0" text="Nota mesatare: ">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="gpaLabel" layoutX="681.0" layoutY="728.0" text="0.00">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
                     </children>
                 </Pane>
-            <Pane fx:id="paneChat" prefHeight="590.0" prefWidth="794.0">
-               <children>
-                  <Label layoutX="18.0" layoutY="14.0" text="Biseda">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                   <VBox alignment="CENTER" layoutX="16.0" layoutY="57.0" prefHeight="688.0" prefWidth="766.0" spacing="10.0">
-                       <children>
-                           <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="766.0" spacing="15.0">
-                               <children>
-                                   <Label fx:id="chatNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9; -fx-background-radius: 20;" text="Filan Fisteku">
-                                       <font>
-                                           <Font size="24.0" />
-                                       </font>
-                                   </Label>
-                                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" translateX="270.0">
-                                       <children>
-                                           <Button fx:id="btnAudioCall" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 20px;" styleClass="menu-buttons" stylesheets="@../styles/style.css">
-                                               <graphic>
-                                                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                                       <image>
-                                                           <Image url="@../images/phone.png" />
-                                                       </image>
-                                                   </ImageView>
-                                               </graphic>
-                                               <cursor>
-                                                   <Cursor fx:constant="HAND" />
-                                               </cursor>
-                                           </Button>
-                                           <Button fx:id="btnVideoCall" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 20;" styleClass="menu-buttons" stylesheets="@../styles/style.css">
-                                               <graphic>
-                                                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                                       <image>
-                                                           <Image url="@../images/video.png" />
-                                                       </image>
-                                                   </ImageView>
-                                               </graphic>
-                                               <cursor>
-                                                   <Cursor fx:constant="HAND" />
-                                               </cursor>
-                                           </Button>
-                                       </children>
-                                   </HBox>
-                               </children></HBox>
-                           <ScrollPane fx:id="messageScrollPane" prefHeight="514.0" prefWidth="919.0" style="-fx-border-color: #e0e0e0;">
-                               <content>
-                                   <VBox fx:id="messagesVbox" prefHeight="502.0" prefWidth="761.0" />
-                               </content>
-                               <padding>
-                                   <Insets left="2.0" right="2.0" />
-                               </padding>
-                           </ScrollPane>
-                           <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="759.0" spacing="27.0">
-                               <children>
-                                   <TextField fx:id="chatMessageField" prefHeight="58.0" prefWidth="682.0">
-                                       <HBox.margin>
-                                           <Insets />
-                                       </HBox.margin>
-                                   </TextField>
-                                   <Button fx:id="btnSendMessage" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#handleClicks" prefHeight="56.0" prefWidth="56.0" style="-fx-background-radius: 50px;" styleClass="menu-buttons" stylesheets="@../styles/style.css" text="Send">
-                                       <HBox.margin>
-                                           <Insets />
-                                       </HBox.margin>
-                                       <graphic>
-                                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                               <image>
-                                                   <Image url="@../images/paper-plane.png" />
-                                               </image>
-                                           </ImageView>
-                                       </graphic>
-                                       <cursor>
-                                           <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                   </Button>
-                               </children>
-                           </HBox>
-                       </children>
-                   </VBox>
-               </children>
-            </Pane>
+                <Pane fx:id="paneChat" prefHeight="590.0" prefWidth="794.0">
+                    <children>
+                        <Label layoutX="18.0" layoutY="14.0" text="Biseda">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Label>
+                        <VBox alignment="CENTER" layoutX="16.0" layoutY="57.0" prefHeight="688.0" prefWidth="766.0" spacing="10.0">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="766.0" spacing="15.0">
+                                    <children>
+                                        <Label fx:id="chatNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="282.0" style="-fx-background-color: #EBE8F9; -fx-background-radius: 20;" text="Filan Fisteku">
+                                            <font>
+                                                <Font size="24.0" />
+                                            </font>
+                                        </Label>
+                                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" translateX="270.0">
+                                            <children>
+                                                <Button fx:id="btnAudioCall" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 20px;" styleClass="menu-buttons" stylesheets="@../styles/style.css">
+                                                    <graphic>
+                                                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@../images/phone.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                    <cursor>
+                                                        <Cursor fx:constant="HAND" />
+                                                    </cursor>
+                                                </Button>
+                                                <Button fx:id="btnVideoCall" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 20;" styleClass="menu-buttons" stylesheets="@../styles/style.css">
+                                                    <graphic>
+                                                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@../images/video.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                    <cursor>
+                                                        <Cursor fx:constant="HAND" />
+                                                    </cursor>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                    </children></HBox>
+                                <ScrollPane fx:id="messageScrollPane" prefHeight="514.0" prefWidth="919.0" style="-fx-border-color: #e0e0e0;">
+                                    <content>
+                                        <VBox fx:id="messagesVbox" prefHeight="502.0" prefWidth="761.0" />
+                                    </content>
+                                    <padding>
+                                        <Insets left="2.0" right="2.0" />
+                                    </padding>
+                                </ScrollPane>
+                                <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="759.0" spacing="27.0">
+                                    <children>
+                                        <TextField fx:id="chatMessageField" prefHeight="58.0" prefWidth="682.0">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </TextField>
+                                        <Button fx:id="btnSendMessage" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#handleClicks" prefHeight="56.0" prefWidth="56.0" style="-fx-background-radius: 50px;" styleClass="menu-buttons" stylesheets="@../styles/style.css" text="Send">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                            <graphic>
+                                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../images/paper-plane.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </Pane>
             </children>
         </StackPane>
     </children>
